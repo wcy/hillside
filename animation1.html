@@ -1,0 +1,53 @@
+<html>
+<body>
+    <canvas id="myCanvas" width="400" height="400"></canvas>
+    <script>
+        let image = new Image();
+        image.src = "https://i.imgur.com/2PfFupd.png";
+
+        var sprite = {
+            x: 0,
+            y: 0,
+            width: 200,
+            height: 200
+        };
+
+        draw_steve = function() {
+            let canvas = document.getElementById("myCanvas");
+            let context = canvas.getContext("2d");
+
+            context.drawImage(
+                image,
+                sprite.width,
+                0,
+                sprite.width,
+                sprite.height,
+                sprite.x,
+                sprite.y,
+                sprite.width,
+                sprite.height
+            );
+        };
+        
+        image.onload = draw_steve;
+        
+        document.addEventListener("keydown", function(event) {
+          switch (event.keyCode) {
+            case 37:
+              sprite.x -= 10;
+              break;
+            case 38:
+              sprite.y -= 10;
+              break;
+            case 39:
+              sprite.x += 10;
+              break;
+            case 40:
+              sprite.y += 10;
+              break;
+          }
+          draw_steve(); // take this out when we use animation!
+        });
+    </script>
+</body>
+</html>
