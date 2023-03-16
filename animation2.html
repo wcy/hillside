@@ -25,15 +25,7 @@
 
     let currentFrame = 0;
     setInterval(function () {
-      if (sprite.dx > canvas.width)
-        sprite.dx = 0;
-      else if (sprite.dx < 0)
-        sprite.dx = canvas.width;
-
-      if (sprite.dy > canvas.height)
-        sprite.dy = 0;
-      else if (sprite.dy < 0)
-        sprite.dy = canvas.height;
+      // add code to wrap sprite to other side here!
 
       currentFrame++;
       currentFrame = currentFrame % sprite.columns;
