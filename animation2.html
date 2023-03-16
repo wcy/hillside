@@ -1,0 +1,78 @@
+<html>
+
+<body>
+  <canvas id="myCanvas" width="500" height="500"></canvas>
+  <script>
+    let image = new Image();
+    image.src = "https://www.spriters-resource.com/resources/sheets/50/52631.png";
+
+    let counter = 0;
+
+    var sprite = {
+      sx: 456,
+      sy: 0,
+      width: 16,
+      height: 16,
+      dx: 250,
+      dy: 250,
+      columns: 2,
+      row: 0
+    };
+
+    let canvas = document.getElementById("myCanvas");
+    let context = canvas.getContext("2d");
+    context.fillStyle = 'black';
+
+    let currentFrame = 0;
+    setInterval(function () {
+      if (sprite.dx > canvas.width)
+        sprite.dx = 0;
+      else if (sprite.dx < 0)
+        sprite.dx = canvas.width;
+
+      if (sprite.dy > canvas.height)
+        sprite.dy = 0;
+      else if (sprite.dy < 0)
+        sprite.dy = canvas.height;
+
+      currentFrame++;
+      currentFrame = currentFrame % sprite.columns;
+      //context.clearRect(0, 0, canvas.width, canvas.height);
+      context.fillRect(0, 0, canvas.width, canvas.height);
+      context.drawImage(
+        image,
+        sprite.sx + currentFrame * sprite.width,
+        sprite.sy + sprite.row * sprite.height,
+        sprite.width,
+        sprite.height,
+        sprite.dx,
+        sprite.dy,
+        sprite.width,
+        sprite.height);
+    }, 100);
+
+
+    document.addEventListener("keydown", function (event) {
+      switch (event.keyCode) {
+        case 37:
+          sprite.dx -= 10; // left
+          sprite.row = 1;
+          break;
+        case 38:
+          sprite.dy -= 10; // up
+          sprite.row = 2;
+          break;
+        case 39:
+          sprite.dx += 10; // right
+          sprite.row = 0;
+          break;
+        case 40:
+          sprite.dy += 10; // down
+          sprite.row = 3;
+          break;
+      }
+    });
+  </script>
+</body>
+
+</html>
